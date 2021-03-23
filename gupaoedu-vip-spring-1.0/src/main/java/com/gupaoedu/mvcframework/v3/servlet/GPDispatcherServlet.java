@@ -21,6 +21,7 @@ import java.util.regex.Pattern;
 
 /**
  * 此类作为启动入口
+ * src/main/webapp/WEB-INF/web.xml,去此次修改生效的GPDispatcherServlet
  * @author Tom
  *
  */
