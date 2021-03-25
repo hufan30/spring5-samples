@@ -120,6 +120,9 @@ public class GPDispatcherServlet extends HttpServlet {
     @Override
     public void init(ServletConfig config) throws ServletException {
         //1、初始化ApplicationContext
+        /**
+         * 这里的config.getInitParameter是从web.xml读取配置，是Tomcat的启动内容；
+         */
         context = new GPApplicationContext(config.getInitParameter(CONTEXT_CONFIG_LOCATION));
         //2、初始化Spring MVC 九大组件
         initStrategies(context);
