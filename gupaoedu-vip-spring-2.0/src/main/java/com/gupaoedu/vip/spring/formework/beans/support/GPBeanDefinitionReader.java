@@ -5,6 +5,7 @@ import com.gupaoedu.vip.spring.formework.beans.config.GPBeanDefinition;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.annotation.Annotation;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -97,6 +98,7 @@ public class GPBeanDefinitionReader {
                 //3、接口注入
                 result.add(doCreateBeanDefinition(toLowerFirstCase(beanClass.getSimpleName()), beanClass.getName()));
 //                result.add(doCreateBeanDefinition(beanClass.getName(),beanClass.getName()));
+                Annotation[] annotations = beanClass.getAnnotations();
 
                 Class<?>[] interfaces = beanClass.getInterfaces();
                 for (Class<?> i : interfaces) {
