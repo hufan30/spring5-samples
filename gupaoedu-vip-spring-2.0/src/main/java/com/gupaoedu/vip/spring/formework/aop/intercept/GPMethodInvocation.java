@@ -16,10 +16,11 @@ public class GPMethodInvocation implements GPJoinPoint {
     private Object proxy;
     private Method method;
     private Object target;
-    private Object [] arguments;
+    private Object[] arguments;
+    //回调的方法链，从GPAdvisedSupport中获取
     private List<Object> interceptorsAndDynamicMethodMatchers;
     private Class<?> targetClass;
-
+    //保存自定义属性
     private Map<String, Object> userAttributes;
 
     //定义一个索引，从-1开始来记录当前拦截器执行的位置
@@ -40,7 +41,7 @@ public class GPMethodInvocation implements GPJoinPoint {
     public Object proceed() throws Throwable {
         //如果Interceptor执行完了，则执行joinPoint
         if (this.currentInterceptorIndex == this.interceptorsAndDynamicMethodMatchers.size() - 1) {
-            return this.method.invoke(this.target,this.arguments);
+            return this.method.invoke(this.target, this.arguments);
         }
 
         Object interceptorOrInterceptionAdvice =
@@ -74,11 +75,10 @@ public class GPMethodInvocation implements GPJoinPoint {
     public void setUserAttribute(String key, Object value) {
         if (value != null) {
             if (this.userAttributes == null) {
-                this.userAttributes = new HashMap<String,Object>();
+                this.userAttributes = new HashMap<String, Object>();
             }
             this.userAttributes.put(key, value);
-        }
-        else {
+        } else {
             if (this.userAttributes != null) {
                 this.userAttributes.remove(key);
             }

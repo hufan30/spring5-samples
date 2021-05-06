@@ -28,6 +28,9 @@ public class GPAdvisedSupport {
 
     private Pattern pointCutClassPattern;
 
+    /**
+     * 这里应该就是初步的回调的方法链，某一个方法，对应一个list，回调的方法链
+     */
     private transient Map<Method, List<Object>> methodCache;
 
     public GPAdvisedSupport(GPAopConfig config) {
