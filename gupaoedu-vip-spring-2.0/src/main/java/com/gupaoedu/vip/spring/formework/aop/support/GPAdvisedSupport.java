@@ -4,6 +4,7 @@ import com.gupaoedu.vip.spring.formework.aop.aspect.GPAfterReturningAdviceInterc
 import com.gupaoedu.vip.spring.formework.aop.aspect.GPAfterThrowingAdviceInterceptor;
 import com.gupaoedu.vip.spring.formework.aop.aspect.GPMethodBeforeAdviceInterceptor;
 import com.gupaoedu.vip.spring.formework.aop.config.GPAopConfig;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -18,6 +19,7 @@ import java.util.List;
 /**
  * Created by Tom on 2019/4/14.
  */
+@Slf4j
 public class GPAdvisedSupport {
 
     private Class<?> targetClass;
@@ -77,11 +79,8 @@ public class GPAdvisedSupport {
                 pointCutForClassRegex.lastIndexOf(" ") + 1));
 
         try {
-
             methodCache = new HashMap<Method, List<Object>>();
             Pattern pattern = Pattern.compile(pointCut);
-
-
 
             Class aspectClass = Class.forName(this.config.getAspectClass());
             Map<String,Method> aspectMethods = new HashMap<String,Method>();
@@ -122,10 +121,9 @@ public class GPAdvisedSupport {
                     }
                     methodCache.put(m,advices);
                 }
-
             }
         }catch (Exception e){
-            e.printStackTrace();
+            log.error(e.getMessage(),e);
         }
 
 
